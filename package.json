@@ -1,6 +1,6 @@
 {
   "name": "@wafo/react-websocket",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple component to use websockets in react.",
   "author": "Jose Luis Vega <joseluisvb@outlook.com>",
   "license": "MIT",
