@@ -41,7 +41,11 @@ const useWebsocket = (wsOptions) => {
           this.reconnect();
         }
       };
-      this.instance.onmessage = wsOptions.onMessage ? wsOptions.onMessage : f => f;
+      this.instance.onmessage = (data) => {
+        if (wsOptions.onMessage) {
+          wsOptions.onMessage(data, this.instance);
+        }
+      }
     },
     reconnect: function () {
       // this.instance.close();
