@@ -1,24 +1,37 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import useWebsocket from './useWebsocket';
 
-const WebsocketComponent = () => {
-  const { socket, socketStatus, socketSend } = useWebsocket({
-    url: 'ws://127.0.0.1:8000',
+const WebsocketComponent = ({ url, onOpen, onMessage, onError, onClose, reconnect }) => {
+  const { socketStatus } = useWebsocket({
+    url,
+    onOpen,
+    onMessage,
+    onError,
+    onClose,
+    reconnect
   });
 
-  const test = () => {
-    console.log(socketStatus);
-    console.log(socket);
-  }
+  console.log('Socket status: ', socketStatus);
 
-  const send = () => {
-    socket.send('ayylmao');
-  }
+  return <React.Fragment></React.Fragment>;
+};
 
-  return <React.Fragment>
-    <button onClick={test}>A ver el socket</button>
-    <button onClick={send}>Send ayylmao</button>
-  </React.Fragment>;
+WebsocketComponent.propTypes = {
+  url: PropTypes.string.isRequired,
+  onOpen: PropTypes.func,
+  onMessage: PropTypes.func,
+  onError: PropTypes.func,
+  onClose: PropTypes.func,
+  reconnect: PropTypes.bool,
+};
+
+WebsocketComponent.defaultProps = {
+  onOpen: f => f,
+  onMessage: f => f,
+  onError: f => f,
+  onClose: f => f,
+  reconnect: true,
 };
 
 export default WebsocketComponent;

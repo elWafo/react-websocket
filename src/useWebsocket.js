@@ -8,6 +8,7 @@ import React from 'react';
  * @property {function} onMessage - Function for the onmessage event.
  * @property {function} onError - Function for the onerror event.
  * @property {function} onClose - Function for the onclose event.
+ * @property {boolean} reconnect - Bool to retry or not the connection.
  */
 
 /**
@@ -28,14 +29,15 @@ const useWebsocket = (wsOptions) => {
       };
       this.instance.onerror = (err) => {
         if (wsOptions.onError) { wsOptions.onError(err); }
-        if (err.code === 'ECONNREFUSED') {
-          // this.reconnect();
+        // TODO: Test if this actually does something.
+        if (err.code === 'ECONNREFUSED' && wsOptions.reconnect) {
+          this.reconnect();
         }
       }
       this.instance.onclose = (evt) => {
         setSocketState(this.instance.readyState);
         if (wsOptions.onClose) { wsOptions.onClose(evt); }
-        if (evt.code !== 1000) {
+        if (evt.code !== 1000 && wsOptions.reconnect) {
           this.reconnect();
         }
       };

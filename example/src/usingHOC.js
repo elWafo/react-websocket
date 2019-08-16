@@ -1,7 +1,7 @@
 import React from 'react'
 import { withWebsocket } from '@wafo/react-websocket'
 
-const App = ({ socketSend, socketStatus }) => {
+const UsingHOC = ({ socketSend, socketStatus }) => {
   React.useEffect(() => {
     if (socketStatus === 1) {
       console.log('The socket is open');
@@ -17,7 +17,7 @@ const App = ({ socketSend, socketStatus }) => {
 };
 
 export default withWebsocket(
-  App,
+  UsingHOC,
   'ws://127.0.0.1:8000',
   () => { console.log('Socket on Open') }
 );

@@ -1,11 +1,11 @@
 import React from 'react'
-import { WebsocketComponent } from '@wafo/react-websocket'
+import UsingHOC from './usingHOC';
+import UsingComponent from './usingComponent';
 
 const App = () => {
   return (
     <div>
-      <span>Ayylmao</span>
-      <WebsocketComponent />
+      <UsingComponent />
     </div>
   );
 };
