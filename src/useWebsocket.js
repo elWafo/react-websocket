@@ -47,7 +47,7 @@ const useWebsocket = (wsOptions) => {
         }
       }
     },
-    reconnect: function () {
+    reconnect: function (time = 1000) {
       // this.instance.close();
       setTimeout(() => {
         this.open();
