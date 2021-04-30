@@ -9,6 +9,7 @@ import React from 'react';
  * @property {function} onError - Function for the onerror event.
  * @property {function} onClose - Function for the onclose event.
  * @property {boolean} reconnect - Bool to retry or not the connection.
+ * @property {int} reconnectTime - Miliseconds to try reconnecting.
  */
 
 /**
@@ -47,11 +48,11 @@ const useWebsocket = (wsOptions) => {
         }
       }
     },
-    reconnect: function (time = 1000) {
+    reconnect: function () {
       // this.instance.close();
       setTimeout(() => {
         this.open();
-      }, 1000);
+      }, wsOptions.reconnectTime || 1000);
     },
   })
 
