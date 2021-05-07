@@ -29,7 +29,7 @@ const useWebsocket = (wsOptions) => {
         if (wsOptions.onOpen) { wsOptions.onOpen(evt, this.instance); }
       };
       this.instance.onerror = (err) => {
-        if (wsOptions.onError) { wsOptions.onError(err); }
+        if (wsOptions.onError) { wsOptions.onError(err, this.instance); }
         // TODO: Test if this actually does something.
         if (err.code === 'ECONNREFUSED' && wsOptions.reconnect) {
           this.reconnect();
@@ -37,7 +37,7 @@ const useWebsocket = (wsOptions) => {
       }
       this.instance.onclose = (evt) => {
         setSocketState(this.instance.readyState);
-        if (wsOptions.onClose) { wsOptions.onClose(evt); }
+        if (wsOptions.onClose) { wsOptions.onClose(evt, this.instance); }
         if (evt.code !== 1000 && wsOptions.reconnect) {
           this.reconnect();
         }
