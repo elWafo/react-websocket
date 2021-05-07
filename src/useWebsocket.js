@@ -26,7 +26,7 @@ const useWebsocket = (wsOptions) => {
 
       this.instance.onopen = (evt) => {
         setSocketState(this.instance.readyState);
-        if (wsOptions.onOpen) { wsOptions.onOpen(evt); }
+        if (wsOptions.onOpen) { wsOptions.onOpen(evt, this.instance); }
       };
       this.instance.onerror = (err) => {
         if (wsOptions.onError) { wsOptions.onError(err); }
